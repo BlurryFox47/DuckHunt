@@ -5,5 +5,6 @@ public class Assignment1 {
         System.out.println("Hello World!");
         //I have no idea if this works
         //Maybe it does not
+        //triple test
     }
 }
