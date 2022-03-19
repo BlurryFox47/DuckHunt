@@ -1,7 +1,6 @@
 package game.duckhunt.gamelogic.other;
 
-import game.duckhunt.gamelogic.cards.Card;
-import game.duckhunt.gamelogic.cards.PondCards;
+import game.duckhunt.gamelogic.cards.PondCard;
 import java.util.ArrayList;
 
 public class Pond {
@@ -9,8 +8,8 @@ public class Pond {
     private final int POND_SIZE = 6;
     private final int CARDS_PER_PLAYER = 5;
     private ArrayList<Boolean> aim;
-    private ArrayList<PondCards> pondDeck;
-    private ArrayList<PondCards> pond;
+    private ArrayList<PondCard> pondDeck;
+    private ArrayList<PondCard> pond;
     //getters
     //setters
     //constructors
@@ -29,12 +28,14 @@ public class Pond {
     private void setupPondDeck(ArrayList<Player> players){
         pondDeck=new ArrayList<>();
         for (int i = 0; i < CARDS_PER_PLAYER; i++) {
-            pondDeck.add(new PondCards("Voda"));
+            pondDeck.add(new PondCard("Voda"));
         }
-        PondCards card;
+        PondCard card;
         for (Player player : players) {
             for (int i = 0; i < CARDS_PER_PLAYER; ++i) {
-                pondDeck.add(new PondCards("Duck player "+i,player));
+                card=new PondCard("Duck player "+ (i+1),player);
+                pondDeck.add(card);
+                player.addDuck(card);
             }
         }
     }
