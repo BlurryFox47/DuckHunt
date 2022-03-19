@@ -24,6 +24,6 @@ public class Game {
         do {
             numPlayers=KeyboardInput.readInt("Enter number of players (2-6)");
         }while (numPlayers<2 || numPlayers>6);
-
+        pond=new Pond(numPlayers);
     }
 }
