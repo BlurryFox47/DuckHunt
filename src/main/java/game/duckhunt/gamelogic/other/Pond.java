@@ -46,7 +46,7 @@ public class Pond {
     public void printPond(){
         for (int i = 0; i < POND_SIZE; ++i) {
             if (aim.get(i))
-                System.out.println((i+1)+". Zamierené "+ pond.get(i).getName());
+                System.out.println((i+1)+". Zamierené "+ pond.get(i).getName()); //tot
         }
     }
 }
