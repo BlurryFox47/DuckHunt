@@ -2,6 +2,7 @@ package game.duckhunt.gamelogic.other;
 
 import game.duckhunt.gamelogic.cards.PondCard;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Pond {
     //attributes
@@ -31,22 +32,29 @@ public class Pond {
             pondDeck.add(new PondCard("Voda"));
         }
         PondCard card;
+        int j=0; //player counter
         for (Player player : players) {
+            ++j;
             for (int i = 0; i < CARDS_PER_PLAYER; ++i) {
-                card=new PondCard("Duck player "+ (i+1),player);
+                card=new PondCard("Duck player "+ j,player);
                 pondDeck.add(card);
                 player.addDuck(card);
             }
         }
+        Collections.shuffle(pondDeck);
     }
     private void setupPond(){
         pond=new ArrayList<>();
-
+        for (int i = 0; i < POND_SIZE; i++) {
+            pond.add(pondDeck.remove(0));
+        }
     }
     public void printPond(){
         for (int i = 0; i < POND_SIZE; ++i) {
             if (aim.get(i))
-                System.out.println((i+1)+". Zamierené "+ pond.get(i).getName());
+                System.out.println((i+1)+". Aimed at\t"+ pond.get(i).getName());
+            else
+                System.out.println((i+1)+". Not aimed at\t"+ pond.get(i).getName());
         }
     }
 }
