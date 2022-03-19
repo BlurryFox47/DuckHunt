@@ -43,4 +43,10 @@ public class Pond {
         pond=new ArrayList<>();
 
     }
+    public void printPond(){
+        for (int i = 0; i < POND_SIZE; ++i) {
+            if (aim.get(i))
+                System.out.println((i+1)+". Zamierené "+ pond.get(i).getName());
+        }
+    }
 }

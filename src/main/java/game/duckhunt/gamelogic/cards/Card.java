@@ -4,6 +4,9 @@ public abstract class Card {
     //attributes
     private String name;
     //getters
+    public String getName() {
+        return name;
+    }
     //setters
     //constructors
     public Card() {
