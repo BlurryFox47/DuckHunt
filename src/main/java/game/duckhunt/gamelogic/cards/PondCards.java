@@ -14,7 +14,7 @@ public class PondCards extends Card {
     }
     public PondCards(String name, Player player) {
         super(name);
-        this.player = player;
+        this.player=player;
     }
     //methods
 }
