@@ -20,9 +20,10 @@ public class ActionCardAim extends ActionCard {
         if (pondIndex<1 || pondIndex>6) {
             throw new InvalidInputException("You selected incorrect pond space\n");
         }
+        --pondIndex;
         if (pond.getAimed(pondIndex)){
             throw new InvalidInputException("This pond space is already aimed at\n");
         }
-        pond.setAimed(pondIndex-1,true);
+        pond.setAimed(pondIndex,true);
     }
 }

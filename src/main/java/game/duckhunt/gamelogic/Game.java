@@ -1,16 +1,13 @@
 package game.duckhunt.gamelogic;
 
 import game.duckhunt.gamelogic.cards.*;
+import game.duckhunt.gamelogic.exceptions.InvalidInputException;
 import game.duckhunt.gamelogic.other.Player;
 import game.duckhunt.gamelogic.other.Pond;
 import game.duckhunt.utility.KeyboardInput;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-import static java.util.Map.entry;
 
 public class Game {
     //attributes
@@ -32,32 +29,66 @@ public class Game {
     public Game() {
         setup();
         int safety=0;
+        int chosenCardIndex;
+
         do {
             ++safety;
             for (Player player : players) {
                 System.out.println("\n\n Turn of player "+player.getName());
+                System.out.println("Turn Num: "+safety);
                 pond.printPond();
                 player.printHand();
-                System.out.print("\033[H\033[23");
-                System.out.flush();
+
+                //TODO check if player can play a card
+                playCard(player);
+
+                System.out.println("Islo nam to dalej");
 
                 //TODO player turnss
                 //TODO at the of each players turn delete all players with zero duck
             }
-        }while (safety<20);
+        }while (safety<3);
         //}while (players.size()>1);
 
         //printAll();
     }
+
+    private void playCard(Player player) {
+        int chosenCardIndex;
+        boolean played;
+        do {
+            chosenCardIndex=chooseCard();
+            played=player.playCard(chosenCardIndex-1,pond);
+        }while (!played);
+        actionDeck.add(player.discard(chosenCardIndex-1));
+        player.addCard(actionDeck.remove(0));
+        //TODO remove card form player
+    }
+    private int chooseCard() {
+        int chosenCard;
+        do {
+            chosenCard=KeyboardInput.readInt("\nChoose which card to play (1-3)");
+            if (chosenCard<1 || chosenCard>3){
+                try {
+                    throw new InvalidInputException("Choose curd number 1,2 or 3");
+                } catch (InvalidInputException e) {
+                    System.out.print(e.getMessage());
+                }
+            }
+        }while (chosenCard<1 || chosenCard>3);
+        return chosenCard;
+    }
+
     //methods
     private void setup(){
         do {
             numPlayers=KeyboardInput.readInt("Enter number of players (2-6)");
         }while (numPlayers<2 || numPlayers>6);
-
         players=new ArrayList<>();
+        String playerName;
         for (int i = 0; i < numPlayers; ++i) {
-            players.add(new Player(String.format("%d",i)));
+            playerName=KeyboardInput.readString("Enter name of player "+(i+1));
+            players.add(new Player(playerName));
         }
         pond=new Pond(numPlayers,players);
         setupActionDeck();
@@ -101,5 +132,9 @@ public class Game {
         for (Player player : players) {
             player.printHand();
         }
+    }
+
+    public void play(){
+
     }
 }

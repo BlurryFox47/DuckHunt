@@ -2,6 +2,7 @@ package game.duckhunt.gamelogic.other;
 
 import game.duckhunt.gamelogic.cards.ActionCard;
 import game.duckhunt.gamelogic.cards.PondCard;
+import game.duckhunt.gamelogic.exceptions.InvalidInputException;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,17 @@ public class Player {
     public String getName(){
         return this.name;
     }
+    public boolean playCard(int index,Pond pond){
+        try {
+            hand.get(index).playCard(pond);
+        } catch (InvalidInputException e) {
+            System.out.print(e.getMessage());
+        }
+        return true;
+    }
+    public ActionCard discard(int index){
+        return hand.remove(index);
+    }
     //setters
     //constructors
     public Player(String name) {
@@ -33,7 +45,8 @@ public class Player {
         ducks.add(duck);
     }
     public void addCard(ActionCard card){
-        hand.add(card);
+        if (hand.size()<HAND_SIZE)
+            hand.add(card);
     }
     public void printHand(){
         System.out.print("Player's Hand:\n");

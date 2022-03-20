@@ -20,6 +20,7 @@ public class ActionCardWildBill extends ActionCard {
         if (pondIndex<1 || pondIndex>6) {
             throw new InvalidInputException("You selected incorrect pond space\n");
         }
+        --pondIndex;
         if (pond.getPondSpace(pondIndex).getName().equals("Water")){
             throw new InvalidInputException("You cannot use Wild Bill at Water");
         }else {
