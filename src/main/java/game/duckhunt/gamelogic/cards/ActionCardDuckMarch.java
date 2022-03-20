@@ -5,5 +5,10 @@ public class ActionCardDuckMarch  extends ActionCard {
     //getters
     //setters
     //constructors
+
+    public ActionCardDuckMarch(String name) {
+        super(name);
+    }
+
     //methods
 }

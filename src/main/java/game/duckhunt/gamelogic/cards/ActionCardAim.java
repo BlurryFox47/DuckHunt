@@ -5,5 +5,8 @@ public class ActionCardAim extends ActionCard {
     //getters
     //setters
     //constructors
+    public ActionCardAim(String name) {
+        super(name);
+    }
     //methods
 }

@@ -5,5 +5,10 @@ public class ActionCardShoot extends ActionCard {
     //getters
     //setters
     //constructors
+
+    public ActionCardShoot(String name) {
+        super(name);
+    }
+
     //methods
 }

@@ -5,5 +5,8 @@ public class ActionCardWildBill extends ActionCard {
     //getters
     //setters
     //constructors
+    public ActionCardWildBill(String name) {
+        super(name);
+    }
     //methods
 }

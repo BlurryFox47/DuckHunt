@@ -14,9 +14,6 @@ public class Player {
     public static int getHAND_SIZE() {
         return HAND_SIZE;
     }
-    public int getHandSize(){
-        return HAND_SIZE;
-    }
     //setters
     //constructors
     public Player() {
@@ -26,5 +23,15 @@ public class Player {
     //methods
     public void addDuck(PondCard duck){
         ducks.add(duck);
+    }
+    public void addCard(ActionCard card){
+        hand.add(card);
+    }
+    public void printHand(){
+        System.out.print("Player's Hand:\n");
+        for (ActionCard actionCard : hand) {
+            System.out.print(actionCard.getName()+"\t");
+        }
+        System.out.print("\n");
     }
 }

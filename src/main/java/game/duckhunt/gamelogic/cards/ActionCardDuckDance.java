@@ -5,5 +5,8 @@ public class ActionCardDuckDance extends ActionCard {
     //getters
     //setters
     //constructors
+    public ActionCardDuckDance(String name) {
+        super(name);
+    }
     //methods
 }

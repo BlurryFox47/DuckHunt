@@ -9,8 +9,6 @@ public abstract class Card {
     }
     //setters
     //constructors
-    public Card() {
-    }
     public Card(String name) {
         this.name = name;
     }

@@ -31,7 +31,7 @@ public class Game {
     //constructors
     public Game() {
         setup();
-
+        printAll();
     }
     //methods
     private void setup(){
@@ -51,43 +51,39 @@ public class Game {
     private void setupActionDeck(){
         actionDeck=new ArrayList<>();
         for (int i = 0; i < NUM_AIM; i++) {
-            actionDeck.add(new ActionCardAim());
+            actionDeck.add(new ActionCardAim("Take aim"));
         }
         for (int i = 0; i < NUM_SHOOT; i++) {
-            actionDeck.add(new ActionCardShoot());
+            actionDeck.add(new ActionCardShoot("Shoot!"));
         }
         for (int i = 0; i < NUM_WILD_BILL; i++) {
-            actionDeck.add(new ActionCardWildBill());
+            actionDeck.add(new ActionCardWildBill("Wild Bill"));
         }
         for (int i = 0; i < NUM_DUCK_MARCH; i++) {
-            actionDeck.add(new ActionCardDuckMarch());
+            actionDeck.add(new ActionCardDuckMarch("Duck March"));
         }
         for (int i = 0; i < NUM_TURBODUCK; i++) {
-            actionDeck.add(new ActionCardTurboduck());
+            actionDeck.add(new ActionCardTurboduck("TURBODUCK!"));
         }
         for (int i = 0; i < NUM_ROSHAMBO; i++) {
-            actionDeck.add(new ActionCardRoshambo());
+            actionDeck.add(new ActionCardRoshambo("Roshambo"));
         }
         for (int i = 0; i < NUM_DUCK_DANCE; i++) {
-            actionDeck.add(new ActionCardDuckDance());
+            actionDeck.add(new ActionCardDuckDance("Duck dance"));
         }
         Collections.shuffle(actionDeck);
     }
     private void dealCards(){
         for (int i = 0; i < Player.getHAND_SIZE(); i++) {
             for (Player player : players) {
-
-            }
+                player.addCard(actionDeck.remove(0));            }
         }
-        for (int i = 0; i < players.get(0).getHandSize(); i++) {
-            for (Player player : players) {
-
-            }
-        }
+    }
+    private void printAll(){
+        pond.printPond();
+        System.out.print("\n");
         for (Player player : players) {
-            for (int i = 0; i < player.getHandSize(); i++) {
-
-            }
+            player.printHand();
         }
     }
 }

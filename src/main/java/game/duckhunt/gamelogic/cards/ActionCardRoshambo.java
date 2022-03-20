@@ -5,5 +5,10 @@ public class ActionCardRoshambo extends ActionCard {
     //getters
     //setters
     //constructors
+
+    public ActionCardRoshambo(String name) {
+        super(name);
+    }
+
     //methods
 }

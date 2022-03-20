@@ -5,5 +5,8 @@ public class ActionCardTurboduck extends ActionCard {
     //getters
     //setters
     //constructors
+    public ActionCardTurboduck(String name) {
+        super(name);
+    }
     //methods
 }
