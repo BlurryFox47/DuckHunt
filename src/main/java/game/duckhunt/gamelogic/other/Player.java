@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Player {
     //attributes
+    private String name;
     private ArrayList<PondCard> ducks;
     private ArrayList<ActionCard> hand;
     private static final int HAND_SIZE=3;
@@ -17,11 +18,15 @@ public class Player {
     public int getLives(){
         return ducks.size();
     }
+    public String getName(){
+        return this.name;
+    }
     //setters
     //constructors
-    public Player() {
+    public Player(String name) {
         ducks=new ArrayList<>();
         hand=new ArrayList<>();
+        this.name=name;
     }
     //methods
     public void addDuck(PondCard duck){
@@ -32,8 +37,10 @@ public class Player {
     }
     public void printHand(){
         System.out.print("Player's Hand:\n");
+        int i=1;
         for (ActionCard actionCard : hand) {
-            System.out.print(actionCard.getName()+"\t");
+            System.out.print(i+" "+actionCard.getName()+"\t");
+            ++i;
         }
         System.out.print("\n");
     }

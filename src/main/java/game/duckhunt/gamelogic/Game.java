@@ -31,9 +31,23 @@ public class Game {
     //constructors
     public Game() {
         setup();
+        int safety=0;
+        do {
+            ++safety;
+            for (Player player : players) {
+                System.out.println("\n\n Turn of player "+player.getName());
+                pond.printPond();
+                player.printHand();
+                System.out.print("\033[H\033[23");
+                System.out.flush();
 
-        printAll();
+                //TODO player turnss
+                //TODO at the of each players turn delete all players with zero duck
+            }
+        }while (safety<20);
+        //}while (players.size()>1);
 
+        //printAll();
     }
     //methods
     private void setup(){
@@ -43,7 +57,7 @@ public class Game {
 
         players=new ArrayList<>();
         for (int i = 0; i < numPlayers; ++i) {
-            players.add(new Player());
+            players.add(new Player(String.format("%d",i)));
         }
         pond=new Pond(numPlayers,players);
         setupActionDeck();
