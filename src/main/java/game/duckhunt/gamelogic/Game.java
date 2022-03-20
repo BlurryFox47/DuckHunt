@@ -31,7 +31,9 @@ public class Game {
     //constructors
     public Game() {
         setup();
+
         printAll();
+
     }
     //methods
     private void setup(){
@@ -44,41 +46,41 @@ public class Game {
             players.add(new Player());
         }
         pond=new Pond(numPlayers,players);
-        //pond.printPond();
         setupActionDeck();
         dealCards();
     }
     private void setupActionDeck(){
         actionDeck=new ArrayList<>();
-        for (int i = 0; i < NUM_AIM; i++) {
+        for (int i = 0; i < NUM_AIM; ++i) {
             actionDeck.add(new ActionCardAim("Take aim"));
         }
-        for (int i = 0; i < NUM_SHOOT; i++) {
+        for (int i = 0; i < NUM_SHOOT; ++i) {
             actionDeck.add(new ActionCardShoot("Shoot!"));
         }
-        for (int i = 0; i < NUM_WILD_BILL; i++) {
+        for (int i = 0; i < NUM_WILD_BILL; ++i) {
             actionDeck.add(new ActionCardWildBill("Wild Bill"));
         }
-        for (int i = 0; i < NUM_DUCK_MARCH; i++) {
+        for (int i = 0; i < NUM_DUCK_MARCH; ++i) {
             actionDeck.add(new ActionCardDuckMarch("Duck March"));
         }
-        for (int i = 0; i < NUM_TURBODUCK; i++) {
+        for (int i = 0; i < NUM_TURBODUCK; ++i) {
             actionDeck.add(new ActionCardTurboduck("TURBODUCK!"));
         }
-        for (int i = 0; i < NUM_ROSHAMBO; i++) {
+        for (int i = 0; i < NUM_ROSHAMBO; ++i) {
             actionDeck.add(new ActionCardRoshambo("Roshambo"));
         }
-        for (int i = 0; i < NUM_DUCK_DANCE; i++) {
+        for (int i = 0; i < NUM_DUCK_DANCE; ++i) {
             actionDeck.add(new ActionCardDuckDance("Duck dance"));
         }
         Collections.shuffle(actionDeck);
     }
     private void dealCards(){
-        for (int i = 0; i < Player.getHAND_SIZE(); i++) {
+        for (int i = 0; i < Player.getHAND_SIZE(); ++i) {
             for (Player player : players) {
                 player.addCard(actionDeck.remove(0));            }
         }
     }
+
     private void printAll(){
         pond.printPond();
         System.out.print("\n");

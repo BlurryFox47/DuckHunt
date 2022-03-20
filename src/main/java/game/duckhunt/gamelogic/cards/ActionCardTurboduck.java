@@ -21,7 +21,7 @@ public class ActionCardTurboduck extends ActionCard {
             throw new InvalidInputException("You selected incorrect pond space\n");
         }
         pond.getPond().add(pond.getPond().remove(pondIndex-1));
-        for (int i = 0; i < pond.getPOND_SIZE(); i++) {
+        for (int i = 0; i < pond.getPOND_SIZE(); ++i) {
             pond.getPond().add(pond.getPond().remove(0));
         }
     }
