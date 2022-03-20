@@ -22,12 +22,11 @@ public class ActionCardShoot extends ActionCard {
             throw new InvalidInputException("You selected incorrect pond space\n");
         }
         if (!(pond.getAimed(pondIndex))){
-            throw new InvalidInputException("This pond space is already aimed at\n");
+            throw new InvalidInputException("This pond space is NOT aimed at. You cannot shoot here\n");
         }
         if (pond.getPondSpace(pondIndex).getName().equals("Water")){
             pond.setAimed(pondIndex,false);
         }else {
-            pond.setAimed(pondIndex,false);
             pond.killDuck(pondIndex);
         }
     }

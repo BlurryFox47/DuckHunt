@@ -20,9 +20,15 @@ public class Pond {
     public PondCard getPondSpace(int index){
         return pond.get(index);
     }
-
     public ArrayList<PondCard> getPond() {
         return pond;
+    }
+    public ArrayList<PondCard> getPondDeck() {
+        return pondDeck;
+    }
+
+    public int getPOND_SIZE() {
+        return POND_SIZE;
     }
 
     //setters
@@ -77,6 +83,7 @@ public class Pond {
         PondCard tmp=pond.remove(index);
         tmp.getPlayer().deleteDuck(tmp);
         pond.add(pondDeck.remove(0));
+        setAimed(index,false);
     }
 
 }
