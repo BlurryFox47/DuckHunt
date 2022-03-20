@@ -12,6 +12,10 @@ public class Pond {
     private ArrayList<PondCard> pondDeck;
     private ArrayList<PondCard> pond;
     //getters
+
+    public Boolean getAimed(int index){
+        return aim.get(index);
+    }
     //setters
     //constructors
     public Pond(int numPlayers, ArrayList<Player> players) {
