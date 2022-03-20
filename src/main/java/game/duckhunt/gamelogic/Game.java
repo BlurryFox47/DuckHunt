@@ -47,7 +47,7 @@ public class Game {
                 //TODO player turnss
                 //TODO at the of each players turn delete all players with zero duck
             }
-        }while (safety<3);
+        }while (safety<20);
         //}while (players.size()>1);
 
         //printAll();
@@ -55,14 +55,13 @@ public class Game {
 
     private void playCard(Player player) {
         int chosenCardIndex;
-        boolean played;
+        boolean played=false;
         do {
             chosenCardIndex=chooseCard();
             played=player.playCard(chosenCardIndex-1,pond);
         }while (!played);
         actionDeck.add(player.discard(chosenCardIndex-1));
         player.addCard(actionDeck.remove(0));
-        //TODO remove card form player
     }
     private int chooseCard() {
         int chosenCard;
