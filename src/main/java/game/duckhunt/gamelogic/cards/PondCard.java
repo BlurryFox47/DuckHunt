@@ -6,6 +6,11 @@ public class PondCard extends Card {
     //attributes
     private Player player;
     //getters
+
+    public Player getPlayer() {
+        return player;
+    }
+
     //setters
     //constructors
     public PondCard(String name) {

@@ -1,6 +1,8 @@
 package game.duckhunt.gamelogic.other;
 
 import game.duckhunt.gamelogic.cards.PondCard;
+import game.duckhunt.gamelogic.exceptions.InvalidInputException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,11 +14,21 @@ public class Pond {
     private ArrayList<PondCard> pondDeck;
     private ArrayList<PondCard> pond;
     //getters
-
     public Boolean getAimed(int index){
         return aim.get(index);
     }
+    public PondCard getPondSpace(int index){
+        return pond.get(index);
+    }
+
+    public ArrayList<PondCard> getPond() {
+        return pond;
+    }
+
     //setters
+    public void setAimed(int index, boolean aiming) {
+        aim.set(index,aiming);
+    }
     //constructors
     public Pond(int numPlayers, ArrayList<Player> players) {
         setupAim();
@@ -33,7 +45,7 @@ public class Pond {
     private void setupPondDeck(ArrayList<Player> players){
         pondDeck=new ArrayList<>();
         for (int i = 0; i < CARDS_PER_PLAYER; i++) {
-            pondDeck.add(new PondCard("Voda"));
+            pondDeck.add(new PondCard("Water"));
         }
         PondCard card;
         int j=0; //player counter
@@ -61,4 +73,10 @@ public class Pond {
                 System.out.println((i+1)+". Not aimed at\t"+ pond.get(i).getName());
         }
     }
+    public void killDuck(int index){
+        PondCard tmp=pond.remove(index);
+        tmp.getPlayer().deleteDuck(tmp);
+        pond.add(pondDeck.remove(0));
+    }
+
 }
