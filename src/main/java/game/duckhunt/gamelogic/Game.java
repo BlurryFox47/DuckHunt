@@ -28,55 +28,10 @@ public class Game {
     //constructors
     public Game() {
         setup();
-        int safety=0;
-        int chosenCardIndex;
-
-        do {
-            ++safety;
-            for (Player player : players) {
-                System.out.println("\n\n Turn of player "+player.getName());
-                System.out.println("Turn Num: "+safety);
-                pond.printPond();
-                player.printHand();
-
-                //TODO check if player can play a card
-                playCard(player);
-
-                System.out.println("Islo nam to dalej");
-
-                //TODO player turnss
-                //TODO at the of each players turn delete all players with zero duck
-            }
-        }while (safety<20);
-        //}while (players.size()>1);
-
-        //printAll();
+        play();
     }
 
-    private void playCard(Player player) {
-        int chosenCardIndex;
-        boolean played=false;
-        do {
-            chosenCardIndex=chooseCard();
-            played=player.playCard(chosenCardIndex-1,pond);
-        }while (!played);
-        actionDeck.add(player.discard(chosenCardIndex-1));
-        player.addCard(actionDeck.remove(0));
-    }
-    private int chooseCard() {
-        int chosenCard;
-        do {
-            chosenCard=KeyboardInput.readInt("\nChoose which card to play (1-3)");
-            if (chosenCard<1 || chosenCard>3){
-                try {
-                    throw new InvalidInputException("Choose curd number 1,2 or 3");
-                } catch (InvalidInputException e) {
-                    System.out.print(e.getMessage());
-                }
-            }
-        }while (chosenCard<1 || chosenCard>3);
-        return chosenCard;
-    }
+
 
     //methods
     private void setup(){
@@ -124,7 +79,6 @@ public class Game {
                 player.addCard(actionDeck.remove(0));            }
         }
     }
-
     private void printAll(){
         pond.printPond();
         System.out.print("\n");
@@ -132,8 +86,69 @@ public class Game {
             player.printHand();
         }
     }
-
     public void play(){
+        int roundCount=0;
+        do {
+            System.out.print("Round Num: ");
+            System.out.println(++roundCount);
+            removePlayers();
+            for (Player player : players) {
+                System.out.println("\n\n Turn of player "+player.getName());
 
+                if (player.getLives()>0){
+
+                    pond.printPond();
+                    player.printHand();
+
+                    if (isPlayable(player)){
+                        playCard(player);
+                    }else{
+                        System.out.println("You could not play anything");
+                        actionDeck.add(player.discardCard(0));
+                        player.addCard(actionDeck.remove(0));
+                    }
+                }else{
+                    System.out.println("You have been eliminated from the game");
+                }
+            }
+        }while (players.size()>1);
+        System.out.println("The winner is player: "+players.get(0).getName());
+        //printAll();
+    }
+    private void playCard(Player player) {
+        int chosenCardIndex;
+        boolean played;
+        do {
+            chosenCardIndex=chooseCard();
+            played=player.playCard(chosenCardIndex-1,pond);
+        }while (!played);
+        actionDeck.add(player.discardCard(chosenCardIndex-1));
+        player.addCard(actionDeck.remove(0));
+    }
+    private int chooseCard() {
+        int chosenCard;
+        do {
+            chosenCard=KeyboardInput.readInt("\nChoose which card to play (1-3)");
+            if (chosenCard<1 || chosenCard>3){
+                try {
+                    throw new InvalidInputException("Choose curd number 1,2 or 3");
+                } catch (InvalidInputException e) {
+                    System.out.print(e.getMessage());
+                }
+            }
+        }while (chosenCard<1 || chosenCard>3);
+        return chosenCard;
+    }
+    private boolean isPlayable(Player player){
+        return (!player.has3Aims() || !pond.has6aim(true)) && (!player.has3Shoots() || !pond.has6aim(false));
+    }
+    private void removePlayers(){
+        for (int i = 0; i < players.size(); i++) {
+            Player player=players.get(i);
+            if (player.getLives()==0){
+                players.remove(i);
+                --i;
+            }
+        }
     }
 }

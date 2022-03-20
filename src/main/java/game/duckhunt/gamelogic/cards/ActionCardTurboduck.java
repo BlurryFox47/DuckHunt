@@ -20,10 +20,13 @@ public class ActionCardTurboduck extends ActionCard {
         if (pondIndex<1 || pondIndex>6) {
             throw new InvalidInputException("You selected incorrect pond space\n");
         }
-        //TODO check for duck only
-        pond.getPond().add(pond.getPond().remove(pondIndex-1));
-        for (int i = 0; i < pond.getPOND_SIZE()-1; ++i) {
-            pond.getPond().add(pond.getPond().remove(0));
+        if (pond.getPondSpace(pondIndex-1).getName().equals("Water")) {
+            throw new InvalidInputException("You cannot use TURBODUCK at Water\n because the card is called TURBODUCK not TURBOWATER...");
+        }else{
+            pond.getPond().add(pond.getPond().remove(pondIndex-1));
+            for (int i = 0; i < pond.getPOND_SIZE()-1; ++i) {
+                pond.getPond().add(pond.getPond().remove(0));
+            }
         }
     }
 }

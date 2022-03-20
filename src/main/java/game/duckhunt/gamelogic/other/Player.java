@@ -25,12 +25,13 @@ public class Player {
     public boolean playCard(int index,Pond pond){
         try {
             hand.get(index).playCard(pond);
+            return true;
         } catch (InvalidInputException e) {
             System.out.print(e.getMessage());
         }
-        return true;
+        return false; //TODO zmena
     }
-    public ActionCard discard(int index){
+    public ActionCard discardCard(int index){
         return hand.remove(index);
     }
     //setters
@@ -59,5 +60,23 @@ public class Player {
     }
     public void deleteDuck(PondCard duck){
         ducks.remove(duck);
+    }
+    public boolean has3Aims(){
+        int count=0;
+        for (ActionCard card : hand) {
+            if (card.getName().equals("Take aim")){
+                ++count;
+            }
+        }
+        return count == HAND_SIZE;
+    }
+    public boolean has3Shoots(){
+        int count=0;
+        for (ActionCard card : hand) {
+            if (card.getName().equals("Shoot!")){
+                ++count;
+            }
+        }
+        return count == HAND_SIZE;
     }
 }

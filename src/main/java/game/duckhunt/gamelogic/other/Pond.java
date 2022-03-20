@@ -1,5 +1,6 @@
 package game.duckhunt.gamelogic.other;
 
+import game.duckhunt.gamelogic.cards.ActionCard;
 import game.duckhunt.gamelogic.cards.PondCard;
 import game.duckhunt.gamelogic.exceptions.InvalidInputException;
 
@@ -58,7 +59,7 @@ public class Pond {
         for (Player player : players) {
             ++j;
             for (int i = 0; i < CARDS_PER_PLAYER; ++i) {
-                card=new PondCard("Duck player "+ j,player);
+                card=new PondCard("Duck of player "+ player.getName(),player);
                 pondDeck.add(card);
                 player.addDuck(card);
             }
@@ -85,5 +86,21 @@ public class Pond {
         pond.add(pondDeck.remove(0));
         setAimed(index,false);
     }
-
+    public boolean has6aim(boolean type){
+        int count=0;
+        if (type){
+            for (boolean aimed : aim) {
+                if (aimed){
+                    ++count;
+                }
+            }
+        }else{
+            for (boolean aimed : aim) {
+                if (!aimed){
+                    ++count;
+                }
+            }
+        }
+        return count == POND_SIZE;
+    }
 }
