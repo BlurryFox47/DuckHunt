@@ -28,7 +28,6 @@ public class Game {
     //constructors
     public Game() {
         setup();
-        play();
     }
 
 
@@ -91,30 +90,30 @@ public class Game {
         do {
             System.out.print("Round Num: ");
             System.out.println(++roundCount);
-            removePlayers();
-            for (Player player : players) {
+
+            for (int i=0;i<players.size();++i){ //todo changed from iteration loop to integer loop
+                Player player=players.get(i);
                 System.out.println("\n\n Turn of player "+player.getName());
+                //todo deleted if else
+                pond.printPond();
+                player.printHand();
 
-                if (player.getLives()>0){
-
-                    pond.printPond();
-                    player.printHand();
-
-                    if (isPlayable(player)){
-                        playCard(player);
-                    }else{
-                        System.out.println("You could not play anything");
-                        actionDeck.add(player.discardCard(0));
-                        player.addCard(actionDeck.remove(0));
-                    }
+                if (isPlayable(player)){
+                    playCard(player);
                 }else{
-                    System.out.println("You have been eliminated from the game");
+                    System.out.println("You could not play anything");
+                    actionDeck.add(player.discardCard(0));
+                    player.addCard(actionDeck.remove(0));
                 }
+
+                removePlayers();    //todo moved into players turn
             }
+
         }while (players.size()>1);
+
         System.out.println("The winner is player: "+players.get(0).getName());
-        //printAll();
     }
+
     private void playCard(Player player) {
         int chosenCardIndex;
         boolean played;
@@ -143,11 +142,12 @@ public class Game {
         return (!player.has3Aims() || !pond.has6aim(true)) && (!player.has3Shoots() || !pond.has6aim(false));
     }
     private void removePlayers(){
-        for (int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < players.size(); ++i) {
             Player player=players.get(i);
             if (player.getLives()==0){
                 players.remove(i);
                 --i;
+                System.out.println("Player "+player.getName()+" have been eliminated from the game"); //todo printing deleted player message
             }
         }
     }

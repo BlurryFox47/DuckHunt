@@ -16,7 +16,7 @@ public class ActionCardWildBill extends ActionCard {
 
     @Override
     public void playCard(Pond pond) throws InvalidInputException {
-        int pondIndex= KeyboardInput.readInt("Select an aimed upon pond space to shoot at (1-6)");
+        int pondIndex= KeyboardInput.readInt("Select a duck to shoot at (1-6)");
         if (pondIndex<1 || pondIndex>6) {
             throw new InvalidInputException("You selected incorrect pond space\n");
         }
